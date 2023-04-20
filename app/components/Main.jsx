@@ -7,7 +7,7 @@ import Image from "next/image";
 
 function Main() {
   const URL_BASE = "https://api.themoviedb.org/3";
-  const API_KEY = "f4c9595520ff6c172a5c4e2de4833661";
+  
   const IMAGE_PATH = "https://image.tmdb.org/t/p/original";
   const URL_IMAGE = "https://image.tmdb.org/t/p/original";
 
@@ -23,7 +23,7 @@ function Main() {
       data: { results },
     } = await axios.get(`${URL_BASE}/${type}/movie`, {
       params: {
-        api_key: API_KEY,
+        api_key: process.env.API_KEY,
         query: query,
       },
     });
@@ -40,7 +40,7 @@ function Main() {
   const oneSingleMovie = async (id) => {
     const { data } = await axios.get(`${URL_BASE}/movie/${id}`, {
       params: {
-        api_key: API_KEY,
+        api_key: process.env.API_KEY,
         append_to_response: "videos",
       },
     });
@@ -92,7 +92,7 @@ function Main() {
         </form>
 
         {/* aqui va el contenedor del banner y reproductor del video */}
-        <div>
+        <div className="mb-8">
           <main>
             {movie ? (
               <div
