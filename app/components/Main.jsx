@@ -7,7 +7,7 @@ import Image from "next/image";
 
 function Main() {
   const URL_BASE = "https://api.themoviedb.org/3";
-  
+
   const IMAGE_PATH = "https://image.tmdb.org/t/p/original";
   const URL_IMAGE = "https://image.tmdb.org/t/p/original";
 
@@ -124,7 +124,7 @@ function Main() {
                     />
                     <button
                       onClick={() => setPlaying(false)}
-                      className="bg-[#0F1014] text-white outline-none border-1 border-white py-1 px-2 cursor-pointer mb-1"
+                      className="bg-blue-800 text-white outline-none border-1 border-white py-1 px-2 cursor-pointer mb-1"
                     >
                       Close
                     </button>
@@ -134,15 +134,19 @@ function Main() {
                     <div>
                       {trailer ? (
                         <button
-                        className="bg-[#0F1014] text-white outline-none border-1 border-white py-1 px-2 cursor-pointer mb-1"
-                        onClick={() => setPlaying(true)}
-                        > Play Trailer
+                          className="bg-blue-800 text-white outline-none border-1 border-white py-1 px-2 cursor-pointer mb-1"
+                          onClick={() => setPlaying(true)}
+                        >
+                          {" "}
+                          Play Trailer
                         </button>
-                        ) : (
-                          "Sorry, no trailer available"
+                      ) : (
+                        "Sorry, no trailer available"
                       )}
-                      <h1 className="text-white">{movie.title}</h1>
-                      <p className="text-white">{movie.overview}</p>
+                      <div className="bg-black bg-opacity-70 p-2">
+                        <h1 className="text-white text-bold text-2xl">{movie.title}</h1>
+                        <p className="text-white text-sm">{movie.overview}</p>
+                      </div>
                     </div>
                   </div>
                 )}
@@ -154,7 +158,11 @@ function Main() {
         {/* contendor de las peliculas actuales */}
         <div className="w-full text-black grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5  2xl:max-w-[2200px] 2xl:mx-auto gap-8 px-8">
           {movies.map((it) => (
-            <div key={it.id} className="flex flex-col items-center cursor-pointer" onClick={()=>selectMovie(it)}>
+            <div
+              key={it.id}
+              className="flex flex-col items-center cursor-pointer"
+              onClick={() => selectMovie(it)}
+            >
               <Image
                 src={`${URL_IMAGE + it.poster_path}`}
                 alt="movie-poster"
@@ -162,10 +170,10 @@ function Main() {
                 width={300}
                 unoptimized={true}
               />
-              <h4 className="text-bold">{it.title}</h4>
-              <h4 className="text-gray-500">
-                {it.release_date.substring(0, 4)}
-              </h4>
+              <h4 className="text-bold text-md pt-2">{it.title} <span className="text-gray-500">
+                 - {it.release_date.substring(0, 4)}
+              </span></h4>
+              
             </div>
           ))}
         </div>
