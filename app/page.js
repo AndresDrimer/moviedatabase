@@ -11,7 +11,8 @@ export default function Home() {
   return (
     <main className='bg-gray-100' >
     <div className='border-2 shadow-xl flex justify-center items-center rounded-lg py-4'>
-       <h1 className="text-bold text-3xl sm:text-5xl md:text-6xl text-center"> ABETO´S MOVIE DATABASE</h1>
+    <Image src="/logo3.png" width={400} height={400} alt="logo" className='p-8'/>
+       
     </div>
      
 <Main />

@@ -16,6 +16,7 @@ function Main() {
   const [trailer, setTrailer] = useState(null);
   const [movie, setMovie] = useState({ title: "Loading Movies" });
   const [playing, setPlaying] = useState(false);
+  const [showInfo, setShowInfo] = useState(false)
 
   const fetchMovies = async (query) => {
     const type = query ? "search" : "discover";
@@ -69,10 +70,15 @@ function Main() {
   useEffect(() => {
     fetchMovies();
   }, []);
-
+console.log(movie)
   return (
     <>
       <div className="w-full mt-8">
+        <nav>
+          <ul>
+            <li></li>
+          </ul>
+        </nav>
         <h2 className="font-3xl font-bold text-center mb-8"> Trailer Movies</h2>
 
         <form
@@ -102,10 +108,10 @@ function Main() {
                 }}
               >
                 {playing ? (
-                  <>
+                  <div className="w-full relative">
                     <YouTube
                       videoId={trailer.key}
-                      className="w-full h-[600px]"
+                      className="w-full h-[600px] "
                       containerClassName={"youtube-container"}
                       opts={{
                         width: "100%",
@@ -124,28 +130,43 @@ function Main() {
                     />
                     <button
                       onClick={() => setPlaying(false)}
-                      className="bg-blue-800 text-white outline-none border-1 border-white py-1 px-2 cursor-pointer mb-1"
+                      className="bg-blue-800 text-white outline-none border-1 border-white py-1 px-2 cursor-pointer mb-1 absolute top-[70px] right-[8px] z-[3] animate-pulse "
                     >
                       Close
                     </button>
-                  </>
+                  </div>
                 ) : (
                   <div className="container">
                     <div>
                       {trailer ? (
+                        <div className="flex">
                         <button
                           className="bg-blue-800 text-white outline-none border-1 border-white py-1 px-2 cursor-pointer mb-1"
                           onClick={() => setPlaying(true)}
                         >
                           {" "}
                           Play Trailer
-                        </button>
+                        </button> 
+                        <button 
+                          className="bg-black text-white ml-2 py-1 px-2 outline-none border-1 mb-1"
+                          onClick={()=> setShowInfo(prev=> !prev)}
+                        >{showInfo ? "X" :"+ info"}</button></div>
                       ) : (
-                        "Sorry, no trailer available"
+                        <button className="bg-blue-800 text-white outline-none border-1 border-white py-1 px-2  mb-1">
+                          "Sorry, no trailer available"
+                        </button>
                       )}
                       <div className="bg-black bg-opacity-70 p-2">
-                        <h1 className="text-white text-bold text-2xl">{movie.title}</h1>
+                        <h1 className="text-white text-bolder text-2xl">
+                          {movie.title}
+                        </h1>
                         <p className="text-white text-sm">{movie.overview}</p>
+                        {showInfo && (<><hr className="w-[40px] my-4"/>
+                          <ul className="text-white text-sm">
+                            <li>Popularity: <span className="text-bolder">{movie.popularity}</span></li>
+                            <li>Genres: <span className="text-bolder">{movie.genres && movie.genres.map(it=>`${it.name} `)}</span></li>
+                            <li>Release date: <span className="text-bolder">{movie.release_date}</span></li>
+                            </ul></>)}
                       </div>
                     </div>
                   </div>
@@ -169,11 +190,14 @@ function Main() {
                 height={200}
                 width={300}
                 unoptimized={true}
+                className="hover:scale-105"
               />
-              <h4 className="text-bold text-md pt-2">{it.title} <span className="text-gray-500">
-                 - {it.release_date.substring(0, 4)}
-              </span></h4>
-              
+              <h4 className="text-bold text-md pt-2">
+                {it.title}{" "}
+                <span className="text-gray-500">
+                  - {it.release_date.substring(0, 4)}
+                </span>
+              </h4>
             </div>
           ))}
         </div>
