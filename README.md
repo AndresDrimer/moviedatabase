@@ -21,3 +21,5 @@ Despues quisiera que ademas de permitir el ingreso, el usuario pueda:
 //Que trae por default al cargar? Las mas recientes? o las mas puntuadas?
 
 // Puntaje. Incluir puntaje de database y tambien permitir al usuario puntuar
+
+//Agregar typescript
