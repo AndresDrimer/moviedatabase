@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import YouTube from "react-youtube";
 import Image from "next/image";
+import Header from "./Header/Header";
+import noPosterCover from '../../public/noposter.png'
+
 
 function Main() {
   const URL_BASE = "https://api.themoviedb.org/3";
@@ -16,8 +19,12 @@ function Main() {
   const [trailer, setTrailer] = useState(null);
   const [movie, setMovie] = useState({ title: "Loading Movies" });
   const [playing, setPlaying] = useState(false);
-  const [showInfo, setShowInfo] = useState(false)
+  const [showInfo, setShowInfo] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [showMovieSearch, setShowMovieSearch] = useState(true)
 
+
+  //metodo que pide todas las peliculas y actualiza con ellas el estado "movies"
   const fetchMovies = async (query) => {
     const type = query ? "search" : "discover";
     const {
@@ -67,20 +74,46 @@ function Main() {
     fetchMovies(query);
   };
 
+
+  /// metodo para traer las categorias
+ const getCategoriesFetch = async () => {
+    try {
+      const {data: { genres }, } = await axios.get(`${URL_BASE}/genre/movie/list`, {
+        params: {
+          api_key: process.env.API_KEY,
+        },
+      });
+      console.log(genres)
+      setCategories(genres); 
+    } 
+    catch(err)  { err=>{
+      console.log(err)
+    }
+  };
+};
+
+
+
+
+
   useEffect(() => {
     fetchMovies();
+    getCategoriesFetch();
   }, []);
-console.log(movie)
-  return (
-    <>
-      <div className="w-full mt-8">
-        <nav>
-          <ul>
-            <li></li>
-          </ul>
-        </nav>
-        <h2 className="font-3xl font-bold text-center mb-8"> Trailer Movies</h2>
 
+  return (
+    <>      
+    <Header URL_BASE={URL_BASE} setMovies={setMovies} setMovie={setMovie} oneSingleMovie={oneSingleMovie} categories={categories} setShowMovieSearch={setShowMovieSearch} />
+      
+    
+    
+    <div className="w-full">
+   
+       
+
+
+{  showMovieSearch && 
+  ( <><h2 className="font-3xl font-bold text-center mb-8 m-w-[1024px]">View Trailer Movies</h2>
         <form
           className="w-full  my-8 flex justify-center"
           onSubmit={searchMovies}
@@ -88,14 +121,17 @@ console.log(movie)
           <input
             className="border-2 rounded-lg p-2 capitalize"
             type="text"
-            placeholder="Search movies"
+            placeholder="Search movie"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
           <button className="bg-blue-800 text-white px-6 rounded-lg py-0 ml-1 ">
             Search
           </button>
-        </form>
+        </form></>
+  )
+}
+
 
         {/* aqui va el contenedor del banner y reproductor del video */}
         <div className="mb-8">
@@ -176,27 +212,34 @@ console.log(movie)
           </main>
         </div>
 
+
+
+
         {/* contendor de las peliculas actuales */}
         <div className="w-full text-black grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5  2xl:max-w-[2200px] 2xl:mx-auto gap-8 px-8">
-          {movies.map((it) => (
+          {movies.map((it) => 
+            (
             <div
               key={it.id}
               className="flex flex-col items-center cursor-pointer"
               onClick={() => selectMovie(it)}
             >
               <Image
-                src={`${URL_IMAGE + it.poster_path}`}
+              //  src={`${URL_IMAGE + it.poster_path}`}
+              src={it.poster_path ? `${URL_IMAGE + it.poster_path}` :noPosterCover}
                 alt="movie-poster"
-                height={200}
                 width={300}
+                height={200}
+                
                 unoptimized={true}
-                className="hover:scale-105"
+                className="hover:scale-105 w-full h-auto"
               />
-              <h4 className="text-bold text-md pt-2">
-                {it.title}{" "}
+              <h4 className="text-bolder text-md pt-6 text-center uppercase">
+                {it.title}{" "}<br />
+                {it.release_date && (
                 <span className="text-gray-500">
-                  - {it.release_date.substring(0, 4)}
-                </span>
+                   ({it.release_date.substring(0, 4)})
+                </span>)}
               </h4>
             </div>
           ))}
