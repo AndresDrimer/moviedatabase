@@ -8,6 +8,7 @@ import Header from "./Header/Header";
 
 import VideoBannerAndPlayer from "./VideoBannerAndPlayer";
 import DisplayedMoviesContainer from "./DisplayedMoviesContainer";
+import Footer from "./Footer";
 
 function Main() {
   const URL_BASE = "https://api.themoviedb.org/3";
@@ -138,7 +139,7 @@ function Main() {
         selectMovie={selectMovie}
       />
 
-     
+     <Footer darkMode={darkMode} />
     </main>
   );
 }

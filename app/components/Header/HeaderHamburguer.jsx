@@ -13,10 +13,10 @@ function HeaderHamburguer({darkMode, setDarkMode, showHamburguer, setShowHamburg
    >
     {showHamburguer ? (
         <div className="w-[20vw] flex justify-center items-center">
-        <HiMenu className="w-[44px] h-[44px] mt-16" onClick={()=> setShowHamburguer(prev=>!prev)}/></div>
+        <HiMenu className="w-[44px] h-[44px] mt-16 hover:scale-105" onClick={()=> setShowHamburguer(prev=>!prev)}/></div>
         ) : (
-        <section className="flex flex-col justify-start items-center bg-black text-white w-[15vw] h-screen ]">
-        <HiX className="border-2 w-[40px] h-[40px] rounded-lg mt-16"
+        <section className="flex flex-col justify-start items-center bg-black text-white w-[15vw] h-screen">
+        <HiX className="border-2 w-[40px] h-[40px] rounded-lg mt-16 hover:scale-105"
         onClick={()=> setShowHamburguer(prev=>!prev)}/>
         
         <ul className="flex flex-col items-center mt-10"> 
