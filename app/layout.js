@@ -1,6 +1,8 @@
 import "./globals.css";
 import { Roboto } from "next/font/google";
-
+/** 
+ * @type {import("next").Metadata} 
+ */
 
 const roboto = Roboto({ subsets: ["latin"], weight: ["400"] });
 
@@ -9,7 +11,7 @@ export const metadata = {
   description: "Movie Database",
   keywords: ["movie", "database"],
   icons: {
-    icon: "/icon-cinema.ico",
+    icon: "/film.ico",
   },
 };
 
@@ -17,7 +19,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={roboto.className}>
-        {children}
+      
+          {children}
+      
+      
       </body>
     </html>
   );

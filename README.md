@@ -6,13 +6,9 @@ Despues quisiera que ademas de permitir el ingreso, el usuario pueda:
     -mail y pwd de ingreso, tambien acalaracion de mayor de edad o no para filtarle contenido adulto por default
     -nombre
     -avatar
-    -preferencias: filtrar siempre contenido adulto, tema claro/oscuro, puntajes... algo mas?
+    -preferencias: filtrar siempre contenido adulto, puntajes... algo mas?
 
 //Footer?
-
-//en Header deberia verse el estado de logeado o no
-
-//Limpiar aun mas el proyecto compartimentando más (más componentes)
 
 //Agregar dos o tres fetch mas para mostarra pag2 y 3 de respuestas. Hay que hacer un fetch por página no hay otro modo. Se podrian hacer de entrada los tres, y simplemente cambiar el estado de movies al tocar el boton de pag2.
 
