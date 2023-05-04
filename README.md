@@ -8,7 +8,12 @@ Despues quisiera que ademas de permitir el ingreso, el usuario pueda:
     -avatar
     -preferencias: filtrar siempre contenido adulto, puntajes... algo mas?
 
-//Footer?
+
+//Deberia ofrecer + info aunque no tenga trailer 
+
+//Idiomas? 
+
+//se puede hacer que te ofrezca subtitulos e idioma?
 
 //Agregar dos o tres fetch mas para mostarra pag2 y 3 de respuestas. Hay que hacer un fetch por página no hay otro modo. Se podrian hacer de entrada los tres, y simplemente cambiar el estado de movies al tocar el boton de pag2.
 

@@ -26,7 +26,7 @@ function Header({
 
   return (
     <Fragment>
-      <div className="shadow-md flex flex-col justify-center items-center rounded-lg" >
+      <div className="shadow-md flex flex-col justify-center items-center rounded-lg " >
         <HeaderHamburguer
           darkMode={darkMode}
           setDarkMode={setDarkMode}
@@ -36,8 +36,8 @@ function Header({
 
         <Image
           src={darkMode ? "/logo3white.png" : "/logo3.png"}
-          width={400}
-          height={400}
+          width={200}
+          height={200}
           alt="logo"
           className="p-2"
         />
