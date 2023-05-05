@@ -7,6 +7,7 @@ import Header from "./Header/Header";
 import VideoBannerAndPlayer from "./VideoBannerAndPlayer";
 import DisplayedMoviesContainer from "./DisplayedMoviesContainer";
 import Footer from "./Footer";
+import { HiOutlineChevronDoubleLeft, HiOutlineChevronDoubleRight } from "react-icons/hi";
 
 function Main() {
   const URL_BASE = "https://api.themoviedb.org/3";
@@ -23,8 +24,10 @@ function Main() {
   const [showMovieSearch, setShowMovieSearch] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
   const [showHamburguer, setShowHamburguer] = useState(true);
+  const [nextPage, setNextPage] = useState(true) 
 
-  //metodo que pide todas las peliculas y actualiza con ellas el estado "movies"
+  //metodo que pide todas las peliculas y actualiza con ellas el estado "movies" 
+  //le agregué page: 1 a los params para probar de probar paginacion. Creo que no cambia nada, por default trae solo pag=1
   const fetchMovies = async (query) => {
     const type = query ? "search" : "discover";
     const {
@@ -33,16 +36,43 @@ function Main() {
       params: {
         api_key: process.env.API_KEY,
         query: query,
+        page: 1,
       },
     });
 
     setMovies(results);
     setMovie(results[0]);
+    setNextPage(true)
 
     if (results.length) {
       await oneSingleMovie(results[0].id);
     }
   };
+
+//metodo para traer pag2, creo que podria hacerse todo con una segunda variable page que se le pase al llamar el método, incluso en el primer fetch, pero no me funcionó. Dejo esta solución andando, pero a mejorar...
+
+const fetchMoviesPag2 = async (query) => {
+  const type = query ? "search" : "discover";
+  const {
+    data: { results },
+  } = await axios.get(`${URL_BASE}/${type}/movie`, {
+    params: {
+      api_key: process.env.API_KEY,
+      query: query,
+      page: 2,
+    },
+  });
+  console.log("method called")
+  setMovies(results);
+  setMovie(results[0]);
+  setNextPage(false); //cambia el boton
+
+  if (results.length) {
+    await oneSingleMovie(results[0].id);
+  }
+};
+
+
 
   //pide una sola pelicula y muestra el trailer
   const oneSingleMovie = async (id) => {
@@ -128,6 +158,12 @@ function Main() {
         setPlaying={setPlaying}
         setShowInfo={setShowInfo}
       />
+
+<div className="w-full flex justify-end items-center px-4 mb-4 text-xs text-blue-800">
+{nextPage ? (<><HiOutlineChevronDoubleRight />
+  <button onClick={()=>fetchMoviesPag2 (query)}> <p className="px-1">next</p> </button></>) : (<><HiOutlineChevronDoubleLeft />
+  <button onClick={()=>fetchMovies (query)}> <p className="px-1">back</p> </button></>) }
+ </div>
 
       <DisplayedMoviesContainer
         movies={movies}

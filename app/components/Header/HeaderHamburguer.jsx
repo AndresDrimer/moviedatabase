@@ -12,9 +12,9 @@ function HeaderHamburguer({
   return (
     <div className="flex w-full justify-end absolute top-0">
       {showHamburguer ? (
-        <div className="w-[20vw] flex justify-center items-center">
+        <div className="w-full flex justify-end items-center m-4">
           <HiMenu
-            className="w-[44px] h-[44px] hover:scale-105 cursor-pointer mt-8"
+            className="w-[44px] h-[44px] hover:scale-105 cursor-pointer"
             onClick={() => setShowHamburguer((prev) => !prev)}
           />
         </div>

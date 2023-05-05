@@ -6,7 +6,7 @@ function VideoBannerAndPlayer({ movie,IMAGE_PATH, playing, trailer, showInfo, se
     
     
           {/* aqui va el contenedor del banner y reproductor del video */}
-          <div className="mb-8">
+          <div className="mb-4">
             <main>
               {movie ? (
                 <div

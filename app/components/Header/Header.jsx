@@ -26,21 +26,21 @@ function Header({
 
   return (
     <Fragment>
-      <div className="shadow-md flex flex-col justify-center items-center rounded-lg " >
+      <div className="shadow-md flex justify-center items-center rounded-lg " >
         <HeaderHamburguer
           darkMode={darkMode}
           setDarkMode={setDarkMode}
           showHamburguer={showHamburguer} 
           setShowHamburguer={setShowHamburguer}
         />
-
+<div className="w-300 h-100 ">
         <Image
           src={darkMode ? "/logo3white.png" : "/logo3.png"}
           width={200}
           height={200}
           alt="logo"
           className="p-2"
-        />
+        /></div>
       </div>
 
       <CategoriesSelector
