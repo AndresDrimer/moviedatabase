@@ -26,7 +26,10 @@ function Main() {
   const [darkMode, setDarkMode] = useState(false);
   const [showHamburguer, setShowHamburguer] = useState(true);
   const [nextPage, setNextPage] = useState(true);
-
+  const [english, setEnglish] = useState(false);
+  const lang = english ? "en" : "es-ES";
+  console.log(lang)
+  
   //metodo que pide todas las peliculas y actualiza con ellas el estado "movies"
   //le agregué page: 1 a los params para probar de probar paginacion. Creo que no cambia nada, por default trae solo pag=1
   const fetchMovies = async (query) => {
@@ -38,6 +41,7 @@ function Main() {
         api_key: process.env.API_KEY,
         query: query,
         page: 1,
+        language: lang,
       },
     });
 
@@ -61,9 +65,10 @@ function Main() {
         api_key: process.env.API_KEY,
         query: query,
         page: 2,
+        language: lang,
       },
     });
-    console.log("method called");
+    
     setMovies(results);
     setMovie(results[0]);
     setNextPage(false); //cambia el boton
@@ -79,6 +84,7 @@ function Main() {
       params: {
         api_key: process.env.API_KEY,
         append_to_response: "videos",
+        language: lang,
       },
     });
 
@@ -111,6 +117,7 @@ function Main() {
       } = await axios.get(`${URL_BASE}/genre/movie/list`, {
         params: {
           api_key: process.env.API_KEY,
+          language: lang,
         },
       });
       console.log(genres);
@@ -145,6 +152,8 @@ function Main() {
         setQuery={setQuery}
         fetchMovies={fetchMovies}
         playing={playing}
+        english={english}
+        setEnglish={setEnglish}
       />
 
       <VideoBannerAndPlayer
@@ -155,6 +164,7 @@ function Main() {
         showInfo={showInfo}
         setPlaying={setPlaying}
         setShowInfo={setShowInfo}
+        english={english}
       />
 
       <NextButton

@@ -20,7 +20,9 @@ function Header({
   query,
   setQuery,
   fetchMovies,
-  playing
+  playing,
+  english, 
+  setEnglish
 }) {
 
 
@@ -32,6 +34,8 @@ function Header({
           setDarkMode={setDarkMode}
           showHamburguer={showHamburguer} 
           setShowHamburguer={setShowHamburguer}
+          english={english}
+          setEnglish={setEnglish}
         />
 <div className="w-300 h-100 ">
         <Image
@@ -50,9 +54,10 @@ function Header({
         oneSingleMovie={oneSingleMovie}
         categories={categories}
         setShowMovieSearch={setShowMovieSearch}
+        english={english}
       />
 
-      <SearchMovie showMovieSearch={showMovieSearch} query={query} setQuery={setQuery} fetchMovies={fetchMovies} playing={playing}/>
+      <SearchMovie showMovieSearch={showMovieSearch} query={query} setQuery={setQuery} fetchMovies={fetchMovies} playing={playing} english={english}/>
     </Fragment>
   );
 }

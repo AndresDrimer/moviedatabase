@@ -2,13 +2,21 @@
 import { useState } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
 import DarkModeContainer from "./DarkModeContainer";
+import Login from "./Login";
 
 function HeaderHamburguer({
   darkMode,
   setDarkMode,
   showHamburguer,
   setShowHamburguer,
+  english,
+  setEnglish
 }) {
+
+  function handleLanguage(){
+    setEnglish(prev=>!prev)
+  }
+
   return (
     <div className="flex w-full justify-end absolute top-0">
       {showHamburguer ? (
@@ -33,12 +41,13 @@ function HeaderHamburguer({
                 setShowHamburguer={setShowHamburguer}
               />
             </li>
+
             <li className="py-10">
-              <p className="text-lg">login</p>
+              <Login />
             </li>
 
             <li>
-              <p className="text-lg">register</p>
+              <p className="hover:scale-110" onClick={()=>handleLanguage()}><span className={english ? "text-blue-800 text-bolder text-2xl" : "text-sm"}>EN </span>/ <span className={!english ? "text-blue-800 text-bolder text-2xl" : "text-sm"}>ES</span> </p>
             </li>
           </ul>
         </section>
