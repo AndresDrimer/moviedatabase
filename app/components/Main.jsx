@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import YouTube from "react-youtube";
 import Header from "./Header/Header";
-import VideoBannerAndPlayer from "./VideoBannerAndPlayer";
+import VideoBannerAndPlayer from "./VideoBannerAndPlayer/VideoBannerAndPlayer";
 import DisplayedMoviesContainer from "./DisplayedMoviesContainer";
 import Footer from "./Footer";
 
