@@ -22,7 +22,6 @@ function CategoriesSelector({
   // el valor de BASE_URL y los metodos para actualizar los estados me los traje como una prop, al padre de este componente y despues a este mismo
 
   // Get a list of movies by genre
-
   async function getOneCategoryFetch(id, name) {
     try {
       const {
