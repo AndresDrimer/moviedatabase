@@ -29,7 +29,7 @@ function SearchMovie({ showMovieSearch, query, setQuery, fetchMovies, playing, e
             onChange={(e) => setQuery(e.target.value)}
             disabled={playing}
           />
-          <button className="bg-blue-800 text-white px-6 rounded-lg py-0 ml-1 ">
+          <button className="bg-blue-800 text-white px-6 rounded-lg py-0 ml-1 hover:scale-105">
             {english ? "Search" : "Buscar"}
           </button>
         </form>
