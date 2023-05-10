@@ -10,14 +10,10 @@ import Footer from "./Footer";
 
 import NextButton from "./NextButton";
 
-
-
-
 function Main() {
   const URL_BASE = "https://api.themoviedb.org/3";
   const IMAGE_PATH = "https://image.tmdb.org/t/p/original";
   const URL_IMAGE = "https://image.tmdb.org/t/p/original";
-  
 
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState("");
@@ -33,9 +29,7 @@ function Main() {
   const [english, setEnglish] = useState(false);
   const lang = english ? "en" : "es-ES";
   const [creditsOneMovie, setCreditsOneMovie] = useState({
-    cast: [
-      { name: "loading", character: "", credit_id: 1 },
-    ],
+    cast: [{ name: "loading", character: "", credit_id: 1 }],
     crew: [
       { name: "loading", credit_id: 2, job: "Director" },
       { name: "loading", credit_id: 3, job: "Producer" },
@@ -59,7 +53,7 @@ function Main() {
 
     setMovies(results);
     setMovie(results[0]);
-    console.log(movie.backdrop_path)
+   
     setNextPage(true);
 
     if (results.length) {
@@ -94,28 +88,27 @@ function Main() {
 
   //pide una sola pelicula y muestra el trailer
   const oneSingleMovie = async (id) => {
-    try{
-    const { data } = await axios.get(`${URL_BASE}/movie/${id}`, {
-      params: {
-        api_key: process.env.API_KEY,
-        append_to_response: "videos",
-        language: lang,
-      },
-    });
+    try {
+      const { data } = await axios.get(`${URL_BASE}/movie/${id}`, {
+        params: {
+          api_key: process.env.API_KEY,
+          append_to_response: "videos",
+          language: lang,
+        },
+      });
 
-    if (data.videos && data.videos.results) {
-      const trailer = data.videos.results.find(
-        (it) => it.name === "Official Trailer"
-      );
-      setTrailer(trailer ? trailer : data.videos.results[0]);
+      if (data.videos && data.videos.results) {
+        const trailer = data.videos.results.find(
+          (it) => it.name === "Official Trailer"
+        );
+        setTrailer(trailer ? trailer : data.videos.results[0]);
+      }
+      setMovie(data);
+      getCreditsOneMovie(id);
+    
+    } catch (error) {
+      console.log(error);
     }
-    setMovie(data);
-   getCreditsOneMovie(id)
-    console.log(data)
-
-  } catch(error){
-    console.log(error)
-  }
   };
 
   const selectMovie = async (movie) => {
@@ -170,7 +163,6 @@ function Main() {
     }
   };
 
-
   // Get a list of movies by genre
   async function getOneCategoryFetch(id, name) {
     try {
@@ -182,7 +174,7 @@ function Main() {
           with_genres: id,
         },
       });
-      console.log(results);
+     
       setMovies(results);
       setMovie(results[0]);
       if (results.length) {
@@ -197,19 +189,103 @@ function Main() {
     }
   }
 
+  //Get director id
+  const getDirectorId = async (directorName) => {
+    try {
+      const response = await axios.get(`${URL_BASE}/search/person`, {
+        params: {
+          api_key: process.env.API_KEY,
+          query: `${directorName}`,
+        },
+      });
+      const director = response.data.results.find(
+        ({ known_for_department }) => known_for_department === "Directing"
+      );
+      console.log(director.id)
+      return director.id;
+        
+    } catch (err) {
+      (err) => {
+        console.log(err);
+      };
+    }
+  };
+
+  //Get movies by given director
+  const getMoviesByDirector = async (directorName) => {
+    try {
+      const directorId = await getDirectorId(directorName);
+     
+      const response = await axios.get(`${URL_BASE}/discover/movie`, {
+        params: {
+          api_key: process.env.API_KEY,
+          with_crew: `${directorId}`,
+        },
+      });
+      const directedBy = response.data.results;
+      setMovies(directedBy);
+    } catch (err) {
+      (err) => {
+        console.log(err);
+      };
+    }
+  };
+
+//get Interpreter´s id
+const getInterpreterId = async (InterpreterName) => {
+  try {
+    const response = await axios.get(`${URL_BASE}/search/person`, {
+      params: {
+        api_key: process.env.API_KEY,
+        query: `${InterpreterName}`,
+      },
+    });
+   const interpreterId = response.data.results[0].id
+    console.log(interpreterId)
+    return interpreterId;
+  } catch (err) {
+    (err) => {
+      console.log(err);
+    };
+  }
+};
+
+//Get movies from Interpreter(actor/actress)
+const getMoviesByIntepreter = async (InterpreterName) => {
+  try {
+    const InterpreterId = await getInterpreterId(InterpreterName);
+   
+    const response = await axios.get(`${URL_BASE}/discover/movie`, {
+      params: {
+        api_key: process.env.API_KEY,
+        with_cast: `${InterpreterId}`,
+      },
+    });
+    const InterpretedBy = response.data.results;
+    setMovies(InterpretedBy);
+    console.log(InterpretedBy)
+  } catch (err) {
+    (err) => {
+      console.log(err);
+    };
+  }
+};
+
+
+
 
   useEffect(() => {
     fetchMovies();
-    getCategoriesFetch();
+    getCategoriesFetch(); 
   }, []);
 
 
-  return (
-    <main className={darkMode ? "bg-gray-800 text-white" : "transparent"  } 
-    >
+ 
 
-    
-  <Header
+
+  return (
+    <main className={darkMode ? "bg-gray-800 text-white" : "transparent"}>
+      <Header
         URL_BASE={URL_BASE}
         setMovies={setMovies}
         setMovie={setMovie}
@@ -240,6 +316,10 @@ function Main() {
         setShowInfo={setShowInfo}
         english={english}
         creditsOneMovie={creditsOneMovie}
+        getOneCategoryFetch={getOneCategoryFetch}
+        getMoviesByDirector={getMoviesByDirector}
+        getDirectorId={getDirectorId}
+        getMoviesByIntepreter={getMoviesByIntepreter}
       />
 
       <NextButton

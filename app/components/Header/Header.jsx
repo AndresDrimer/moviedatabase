@@ -22,7 +22,8 @@ function Header({
   fetchMovies,
   playing,
   english, 
-  setEnglish
+  setEnglish,
+  getOneCategoryFetch
 }) {
 
 
@@ -55,6 +56,7 @@ function Header({
         categories={categories}
         setShowMovieSearch={setShowMovieSearch}
         english={english}
+        getOneCategoryFetch={getOneCategoryFetch}
       />
 
       <SearchMovie showMovieSearch={showMovieSearch} query={query} setQuery={setQuery} fetchMovies={fetchMovies} playing={playing} english={english}/>

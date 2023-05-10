@@ -10,6 +10,7 @@ function CategoriesSelector({
   categories,
   setShowMovieSearch,
   english,
+  getOneCategoryFetch
 }) {
   //con este selector tengo que
   //1- conseguir el array de categorias -OK
@@ -21,31 +22,7 @@ function CategoriesSelector({
 
   // el valor de BASE_URL y los metodos para actualizar los estados me los traje como una prop, al padre de este componente y despues a este mismo
 
-  // Get a list of movies by genre
-  async function getOneCategoryFetch(id, name) {
-    try {
-      const {
-        data: { results },
-      } = await axios.get(`${URL_BASE}/discover/movie`, {
-        params: {
-          api_key: process.env.API_KEY,
-          with_genres: id,
-        },
-      });
-      console.log(results);
-      setMovies(results);
-      setMovie(results[0]);
-      if (results.length) {
-        await oneSingleMovie(results[0].id);
-        setShowCategories(false);
-        setSelectedCategory(name);
-      }
-    } catch (err) {
-      (err) => {
-        console.log(err);
-      };
-    }
-  }
+  
 
   function handleSearch() {
     setShowCategories((prev) => !prev);
@@ -63,13 +40,13 @@ function CategoriesSelector({
       <nav className="py-4 px-8 w-full ">
         <div className="mb-4 flex justify-center gap-2 max-w-[300px] mx-auto">
           <button
-            className="rounded-lg border-4 px-2 bg-red-800 text-white flex-1"
+            className="rounded-lg border-4 px-2 bg-red-800 text-white flex-1 hover:scale-110"
             onClick={() => handleSearchMovie()}
           >
             {english ? "Search Movie" : "Buscar película"}
           </button>
           <button
-            className="rounded-lg border-4 px-2 bg-blue-800 text-white"
+            className="rounded-lg border-4 px-2 bg-blue-800 text-white hover:scale-110"
             onClick={() => handleSearch()}
           >
             {showCategories ? "X" : searchGenreLang }

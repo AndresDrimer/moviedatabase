@@ -11,11 +11,11 @@ function VideoBannerAndPlayer({
   setShowInfo,
   english,
   creditsOneMovie,
-})
-
-
-
-{
+  getOneCategoryFetch,
+  getMoviesByDirector,
+  getDirectorId ,
+  getMoviesByIntepreter
+}) {
   return (
     <div>
       {/* aqui va el contenedor del banner y reproductor del video */}
@@ -59,39 +59,48 @@ function VideoBannerAndPlayer({
               ) : (
                 <div className="container">
                   <div>
-                  <div className="flex">
-                    {trailer ? (
-                      <div className="flex">
-                        <button
-                          className="bg-blue-800 text-white outline-none border-1 border-white py-1 px-2 cursor-pointer mb-1 hover:scale-110"
-                          onClick={() => setPlaying(true)}
-                        >
-                          {english ? "Play Trailer" : "Ver Trailer"}
+                    <div className="flex">
+                      {trailer ? (
+                        <div className="flex">
+                          <button
+                            className="bg-blue-800 text-white outline-none border-1 border-white py-1 px-2 cursor-pointer mb-1 hover:scale-110"
+                            onClick={() => setPlaying(true)}
+                          >
+                            {english ? "Play Trailer" : "Ver Trailer"}
+                          </button>
+                        </div>
+                      ) : (
+                        <button className="bg-blue-800 text-white outline-none border-1 border-white py-1 px-2  mb-1">
+                          {english
+                            ? "No trailer available"
+                            : "No hay trailer disponible"}
                         </button>
-                       
-                      </div>
-                    ) : (
-                      <button className="bg-blue-800 text-white outline-none border-1 border-white py-1 px-2  mb-1">
-                        {english
-                          ? "No trailer available"
-                          : "No hay trailer disponible"}
+                      )}
+                      <button
+                        className="bg-black text-white ml-2 py-1 px-2 outline-none border-1 mb-1 hover:scale-110"
+                        onClick={() => setShowInfo((prev) => !prev)}
+                      >
+                        {showInfo ? "X" : "+ info"}
                       </button>
-                    )}
-                    <button
-                    className="bg-black text-white ml-2 py-1 px-2 outline-none border-1 mb-1 hover:scale-110"
-                    onClick={() => setShowInfo((prev) => !prev)}
-                  >
-                  
-                    {showInfo ? "X" : "+ info"}
-                  </button></div>
+                    </div>
                     <div className="bg-black bg-opacity-70 p-2 leading-12">
                       <h1 className="text-white text-bolder text-2xl uppercase">
                         {movie.title}
                       </h1>
-                      <h3 className="text-white text-bolder text-lg pb-2">{movie.tagline}</h3>
+                      <h3 className="text-white text-bolder text-lg pb-2">
+                        {movie.tagline}
+                      </h3>
                       <p className="text-white text-sm">{movie.overview}</p>
                       {showInfo && (
-                       <AditionalInfo creditsOneMovie={creditsOneMovie} english={english} movie={movie} />
+                        <AditionalInfo
+                          creditsOneMovie={creditsOneMovie}
+                          english={english}
+                          movie={movie}
+                          getOneCategoryFetch={getOneCategoryFetch}
+                          getMoviesByDirector={getMoviesByDirector}
+                          getDirectorId={getDirectorId}
+                          getMoviesByIntepreter={getMoviesByIntepreter}
+                        />
                       )}
                     </div>
                   </div>
