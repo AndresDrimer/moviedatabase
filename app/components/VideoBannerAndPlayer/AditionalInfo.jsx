@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 function AditionalInfo({ creditsOneMovie, english, movie }) {
+
   return (
     <>
     <hr className="w-[40px] my-4" />
-    <ul className="text-white text-sm">
+    <ul className="text-white text-xs leading-6">
 
       {creditsOneMovie.crew.map(
         (it) =>
@@ -24,18 +25,19 @@ function AditionalInfo({ creditsOneMovie, english, movie }) {
         {creditsOneMovie.crew.map(
           (it, index) =>
             it.job === "Producer" && (
-              <span className="font-bold" key={it.credit_id}>
+              <span className="font-bold" key={it.id}>
                 {it.name}
-                {index < creditsOneMovie.crew.length - 1 ? ", " : "."}
-              </span> //esto no anda, el ultimo no entra en la ultima opcion
+                {index < creditsOneMovie.crew.length - 1 ? ", " : "."} 
+                
+              </span> //esto no anda, el ultimo no entra en la ultima opcion 
             )
         )}
       </li>
 
-      <li key="actors">
+      <li key="actors" className='mt-4'>
         {english
-          ? "Lead actors/actresses by role: "
-          : "Elenco principal por rol: "}
+          ? "Lead interpreters: "
+          : "Elenco principal: "}
         <ul key="actors-ul">
           {creditsOneMovie.cast.slice(0, 5).map((it) => (
             <li key={it.credit_id}>
@@ -73,7 +75,7 @@ function AditionalInfo({ creditsOneMovie, english, movie }) {
               <button
                 className="border-2 rounded-lg mx-1 px-2 hover:scale-110"
                 key={it.name}
-               //aqui hay que agregarle el fetch por una categoria, pero necesito alojar el metodo que lo controla en el parent común. Quizas seria mejor tener una funcion nueva que traiga las del género, pero que deje la actual como [0]....                         
+               //aqui hay que agregarle el fetch por una categoria, pero necesito alojar el metodo que lo controla en el parent común. Quizas seria mejor tener una funcion nueva que traiga las del género, pero que deje la actual como [0]....  AHORA NO EST ACTUALIZANDO LA TRAE UNA NUEVA PELI PERSISITEN     - deberia generarla por useEffect en vez de traerla como prop?                   
               >
                 {it.name}
               </button>

@@ -13,7 +13,7 @@ export const metadata = {
   description: "Movie Database",
   keywords: ["movie", "database"],
   icons: {
-    icon: "/film.ico",
+    icon: "/film.ico", //no anda el ico, no sé por qué
   },
 };
 
@@ -21,6 +21,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={roboto.className}>
+      
       
           {children}
       

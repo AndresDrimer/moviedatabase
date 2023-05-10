@@ -1,7 +1,7 @@
 import React from 'react'
 import noPosterCover from "../../../public/noposter.png";
 
-function SearchMovie({ showMovieSearch,query, setQuery, fetchMovies, playing, english }) {
+function SearchMovie({ showMovieSearch, query, setQuery, fetchMovies, playing, english }) {
   //funcion para buscar peliculas
   const searchMovies = (e) => {
     e.preventDefault();

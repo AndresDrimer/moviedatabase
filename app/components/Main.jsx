@@ -10,10 +10,14 @@ import Footer from "./Footer";
 
 import NextButton from "./NextButton";
 
+
+
+
 function Main() {
   const URL_BASE = "https://api.themoviedb.org/3";
   const IMAGE_PATH = "https://image.tmdb.org/t/p/original";
   const URL_IMAGE = "https://image.tmdb.org/t/p/original";
+  
 
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState("");
@@ -55,6 +59,7 @@ function Main() {
 
     setMovies(results);
     setMovie(results[0]);
+    console.log(movie.backdrop_path)
     setNextPage(true);
 
     if (results.length) {
@@ -89,6 +94,7 @@ function Main() {
 
   //pide una sola pelicula y muestra el trailer
   const oneSingleMovie = async (id) => {
+    try{
     const { data } = await axios.get(`${URL_BASE}/movie/${id}`, {
       params: {
         api_key: process.env.API_KEY,
@@ -104,6 +110,12 @@ function Main() {
       setTrailer(trailer ? trailer : data.videos.results[0]);
     }
     setMovie(data);
+   getCreditsOneMovie(id)
+    console.log(data)
+
+  } catch(error){
+    console.log(error)
+  }
   };
 
   const selectMovie = async (movie) => {
@@ -158,14 +170,46 @@ function Main() {
     }
   };
 
+
+  // Get a list of movies by genre
+  async function getOneCategoryFetch(id, name) {
+    try {
+      const {
+        data: { results },
+      } = await axios.get(`${URL_BASE}/discover/movie`, {
+        params: {
+          api_key: process.env.API_KEY,
+          with_genres: id,
+        },
+      });
+      console.log(results);
+      setMovies(results);
+      setMovie(results[0]);
+      if (results.length) {
+        await oneSingleMovie(results[0].id);
+        setShowCategories(false);
+        setSelectedCategory(name);
+      }
+    } catch (err) {
+      (err) => {
+        console.log(err);
+      };
+    }
+  }
+
+
   useEffect(() => {
     fetchMovies();
     getCategoriesFetch();
   }, []);
 
+
   return (
-    <main className={darkMode ? "bg-gray-800 text-white" : "bg-gray-100"}>
-      <Header
+    <main className={darkMode ? "bg-gray-800 text-white" : "transparent"  } 
+    >
+
+    
+  <Header
         URL_BASE={URL_BASE}
         setMovies={setMovies}
         setMovie={setMovie}
@@ -183,6 +227,7 @@ function Main() {
         playing={playing}
         english={english}
         setEnglish={setEnglish}
+        getOneCategoryFetch={getOneCategoryFetch}
       />
 
       <VideoBannerAndPlayer
