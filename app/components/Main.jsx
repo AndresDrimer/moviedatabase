@@ -2,42 +2,60 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import YouTube from "react-youtube";
 import Header from "./Header/Header";
 import VideoBannerAndPlayer from "./VideoBannerAndPlayer/VideoBannerAndPlayer";
 import DisplayedMoviesContainer from "./DisplayedMoviesContainer";
 import Footer from "./Footer";
-
 import NextButton from "./NextButton";
 
 function Main() {
-  const URL_BASE = "https://api.themoviedb.org/3";
+
+
+  /////////////////////////VARIABLES/////////////////////////////////////////////////////////
+  //string
+  const URL_BASE = "https://api.themoviedb.org/3"; 
   const IMAGE_PATH = "https://image.tmdb.org/t/p/original";
   const URL_IMAGE = "https://image.tmdb.org/t/p/original";
 
-  const [movies, setMovies] = useState([]);
-  const [query, setQuery] = useState("");
-  const [trailer, setTrailer] = useState(null);
-  const [movie, setMovie] = useState({ title: "Loading Movies" });
+
+  //objetos 
+  // ESTOS no se tienen que persistir.  SOLO los de favoritos (y quizas puntajes) van a a persistir, los demas se vuelven a crear cada vez al entrar a la app.Estos van a ser de type <User[]> 
+ 
+  
+  const [movies, setMovies] = useState([]); // objeto compuesto por muchos objetos, pero no tiene que recordar a todas las peliculas que se fueron seleccionando
+  const [trailer, setTrailer] = useState(null); 
+  const [movie, setMovie] = useState({ title: "Loading Movies" }); 
   const [playing, setPlaying] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
-  const [categories, setCategories] = useState([]);
-  const [showMovieSearch, setShowMovieSearch] = useState(true);
-  const [darkMode, setDarkMode] = useState(false);
-  const [showHamburguer, setShowHamburguer] = useState(true);
-  const [nextPage, setNextPage] = useState(true);
-  const [english, setEnglish] = useState(false);
-  const lang = english ? "en" : "es-ES";
+  const [categories, setCategories] = useState([]); 
   const [creditsOneMovie, setCreditsOneMovie] = useState({
     cast: [{ name: "loading", character: "", credit_id: 1 }],
     crew: [
       { name: "loading", credit_id: 2, job: "Director" },
       { name: "loading", credit_id: 3, job: "Producer" },
     ],
-  });
+  }); 
+
+ //booleans
+  const [query, setQuery] = useState(""); 
+  const [showMovieSearch, setShowMovieSearch] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
+  const [showHamburguer, setShowHamburguer] = useState(true);
+  const [nextPage, setNextPage] = useState(true);
+  const [english, setEnglish] = useState(false);
+  const lang = english ? "en" : "es-ES"; // esto que es? un string porque va a resultar en string finalmente?
+ 
+
+
+
+  /////////////////////////METODOS//////////////////////////////////////////////////////////////////
 
   //metodo que pide todas las peliculas y actualiza con ellas el estado "movies"
-  //le agregué page: 1 a los params para probar de probar paginacion. Creo que no cambia nada, por default trae solo pag=1
+  //le agregué page: 1 a los params para probar de probar paginacion. No cambia nada porque default trae sólo la pag=1
+
+  //type typeFetchMovies {
+
+  
   const fetchMovies = async (query) => {
     const type = query ? "search" : "discover";
     const {
@@ -53,7 +71,6 @@ function Main() {
 
     setMovies(results);
     setMovie(results[0]);
-   
     setNextPage(true);
 
     if (results.length) {
@@ -86,7 +103,7 @@ function Main() {
     }
   };
 
-  //pide una sola pelicula y muestra el trailer
+  //metodo que pide una sola pelicula y muestra el trailer
   const oneSingleMovie = async (id) => {
     try {
       const { data } = await axios.get(`${URL_BASE}/movie/${id}`, {
@@ -116,14 +133,14 @@ function Main() {
     setMovie(movie);
     window.scrollTo(0, 0);
   };
-
-  //funcion para buscar peliculas
+  
+  //metodo que busca peliculas
   const searchMovies = (e) => {
     e.preventDefault();
     fetchMovies(query);
   };
 
-  /// metodo para traer las categorias
+  // metodo para traer las categorias
   const getCategoriesFetch = async () => {
     try {
       const {
@@ -215,7 +232,6 @@ function Main() {
   const getMoviesByDirector = async (directorName) => {
     try {
       const directorId = await getDirectorId(directorName);
-     
       const response = await axios.get(`${URL_BASE}/discover/movie`, {
         params: {
           api_key: process.env.API_KEY,
@@ -250,7 +266,7 @@ const getInterpreterId = async (InterpreterName) => {
   }
 };
 
-//Get movies from Interpreter(actor/actress)
+//Get movies from Interpreter
 const getMoviesByIntepreter = async (InterpreterName) => {
   try {
     const InterpreterId = await getInterpreterId(InterpreterName);
@@ -272,20 +288,17 @@ const getMoviesByIntepreter = async (InterpreterName) => {
 };
 
 
-
-
+////USE EFFECT PARA PINTAR TODO AL MONTARSE LA APP
   useEffect(() => {
     fetchMovies();
     getCategoriesFetch(); 
   }, []);
 
 
- 
-
-
   return (
     <main className={darkMode ? "bg-gray-800 text-white" : "transparent"}>
-      <Header
+      
+    <Header
         URL_BASE={URL_BASE}
         setMovies={setMovies}
         setMovie={setMovie}
@@ -336,7 +349,9 @@ const getMoviesByIntepreter = async (InterpreterName) => {
         selectMovie={selectMovie}
       />
 
-      <Footer darkMode={darkMode} />
+      <Footer 
+        darkMode={darkMode} />
+
     </main>
   );
 }

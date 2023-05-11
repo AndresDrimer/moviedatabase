@@ -1,6 +1,4 @@
-
 import firebase from "firebase";
-
 
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_APIKEY,
@@ -8,7 +6,7 @@ const firebaseConfig = {
   projectId: "moviedb-2-1f539",
   storageBucket: "moviedb-2-1f539.appspot.com",
   messagingSenderId: "387655191524",
-  appId: "1:387655191524:web:aed4859aba77b7c8ee95f1"
+  appId: "1:387655191524:web:aed4859aba77b7c8ee95f1",
 };
 
 const app = !firebase.apps.length

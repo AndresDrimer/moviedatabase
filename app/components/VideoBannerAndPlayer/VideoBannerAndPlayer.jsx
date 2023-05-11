@@ -13,9 +13,11 @@ function VideoBannerAndPlayer({
   creditsOneMovie,
   getOneCategoryFetch,
   getMoviesByDirector,
-  getDirectorId ,
-  getMoviesByIntepreter
-}) {
+  getDirectorId,
+  getMoviesByIntepreter,
+}) 
+
+{
   return (
     <div>
       {/* aqui va el contenedor del banner y reproductor del video */}
@@ -83,14 +85,14 @@ function VideoBannerAndPlayer({
                         {showInfo ? "X" : "+ info"}
                       </button>
                     </div>
-                    <div className="bg-black bg-opacity-70 p-2 leading-12">
+                    <div className="bg-black bg-opacity-70 p-2 leading-12 text-md lg:text-4xl">
                       <h1 className="text-white text-bolder text-2xl uppercase">
-                        {movie.title}
+                        "{movie.title}"
                       </h1>
-                      <h3 className="text-white text-bolder text-lg pb-2">
+                      <h3 className="text-white text-bolder text-sm lg:text-lg pb-2">
                         {movie.tagline}
                       </h3>
-                      <p className="text-white text-sm">{movie.overview}</p>
+                      <p className="text-white text-xs lg:text-md">{movie.overview}</p>
                       {showInfo && (
                         <AditionalInfo
                           creditsOneMovie={creditsOneMovie}

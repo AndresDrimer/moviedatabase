@@ -11,7 +11,7 @@ function AditionalInfo({
   return (
     <>
       <hr className="w-[40px] my-4" />
-      <ul className="text-white text-xs leading-6">
+      <ul className="text-white text-xs lg:text-md leading-6">
         {creditsOneMovie.crew.map(
           (it) =>
             it.job === "Director" && (
@@ -31,7 +31,7 @@ function AditionalInfo({
           {creditsOneMovie.crew.map(
             (it, index) =>
               it.job === "Producer" && (
-                <span className="font-bold" key={it.id}>
+                <span className="" key={it.id}>
                   {it.name}
                   {index < creditsOneMovie.crew.length - 1 ? ", " : "."}
                 </span> //esto no anda, el ultimo no entra en la ultima opcion
@@ -42,7 +42,7 @@ function AditionalInfo({
         <li key="actors" className="mt-4">
           {english ? "Lead interpreters: " : "Elenco principal: "}
           <ul key="actors-ul">
-            {creditsOneMovie.cast.slice(0, 5).map((it) => (
+            {creditsOneMovie.cast.slice(0, 5).map((it) => ( //muestra a los primeros 5 solamente
               <li key={it.credit_id}>
                 <button  className="border-2 rounded-lg mx-1 px-1 hover:scale-105"
                 onClick={() => getMoviesByIntepreter(it.name)}>{it.name}</button> as {it.character}

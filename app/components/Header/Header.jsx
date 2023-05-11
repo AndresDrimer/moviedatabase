@@ -21,31 +21,33 @@ function Header({
   setQuery,
   fetchMovies,
   playing,
-  english, 
+  english,
   setEnglish,
-  getOneCategoryFetch
+  getOneCategoryFetch,
 }) {
-
-
   return (
     <Fragment>
-      <div className="shadow-md flex justify-center items-center rounded-lg " >
-        <HeaderHamburguer
+      <div className="shadow-md rounded-lg flex justify-center items-center">
+        
+      <HeaderHamburguer
           darkMode={darkMode}
           setDarkMode={setDarkMode}
-          showHamburguer={showHamburguer} 
+          showHamburguer={showHamburguer}
           setShowHamburguer={setShowHamburguer}
           english={english}
           setEnglish={setEnglish}
         />
-<div className="w-300 h-100 ">
-        <Image
-          src={darkMode ? "/logo3white.png" : "/logo3.png"}
-          width={200}
-          height={200}
-          alt="logo"
-          className="p-2"
-        /></div>
+
+        <div className="w-100 mx-0 my-auto ">
+          <Image
+            src={darkMode ? "/logo3white.png" : "/logo3.png"}
+           alt="logo img"
+            width={200}
+            height={200}
+            priority
+            className=" object-contain object-center w-[50vw] md:w-[30vw] 2xl:w-[20vw] py-4"
+          />
+        </div>
       </div>
 
       <CategoriesSelector
@@ -59,7 +61,14 @@ function Header({
         getOneCategoryFetch={getOneCategoryFetch}
       />
 
-      <SearchMovie showMovieSearch={showMovieSearch} query={query} setQuery={setQuery} fetchMovies={fetchMovies} playing={playing} english={english}/>
+      <SearchMovie
+        showMovieSearch={showMovieSearch}
+        query={query}
+        setQuery={setQuery}
+        fetchMovies={fetchMovies}
+        playing={playing}
+        english={english}
+      />
     </Fragment>
   );
 }

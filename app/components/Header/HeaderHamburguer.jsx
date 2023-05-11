@@ -22,14 +22,14 @@ function HeaderHamburguer({
       {showHamburguer ? (
         <div className="w-full flex justify-end items-center m-4">
           <HiMenu
-            className="w-[44px] h-[44px] hover:scale-105 cursor-pointer"
+            className="w-[30px] h-[30px] mt-4 md:mt-6 lg:mt-10 xl:mt-12 lg:mr-4 lg:w-[55px] lg:h-[55px] hover:scale-105 cursor-pointer"
             onClick={() => setShowHamburguer((prev) => !prev)}
           />
         </div>
       ) : (
-        <section className="flex flex-col justify-start items-center bg-black text-white w-[25vw] h-screen">
+        <section className="flex flex-col justify-start items-center bg-black text-white w-[25vw] h-screen z-[1]">
           <HiX
-            className="border-2 w-[40px] h-[40px] rounded-lg mt-8 hover:scale-105 cursor-pointer"
+            className="border-2 w-[30px] h-[30px] rounded-lg mt-8 hover:scale-105 cursor-pointer"
             onClick={() => setShowHamburguer((prev) => !prev)}
           />
 
