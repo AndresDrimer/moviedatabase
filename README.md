@@ -1,5 +1,5 @@
 features pendientes:
-
+..
 TO DO:
 
 //Auth : una opcion seria hacerla con NextAuth. (o Firebase)
