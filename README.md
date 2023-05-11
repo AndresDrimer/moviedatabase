@@ -1,6 +1,6 @@
 features pendientes:
 ..
-TO DO:
+TO DO:..
 
 //Auth : una opcion seria hacerla con NextAuth. (o Firebase)
 Despues quisiera que ademas de permitir el ingreso, el usuario pueda:
