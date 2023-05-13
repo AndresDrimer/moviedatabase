@@ -9,12 +9,17 @@ Despues quisiera que ademas de permitir el ingreso, el usuario pueda:
     -edad para filtarle o no contenido adulto por default
     -nombre
     -avatar
-    -preferencias: filtrar siempre contenido adulto o no, poner puntajes propios, elegir sus favoritos y almacenarlos... algo mas? (la api te ofrece pasarte pelis parecidas a su coleccion de favoritas?)
+    -preferencias: filtrar siempre contenido adulto o no, poner puntajes propios, elegir sus favoritos y almacenarlos, y el idioma seleccionado. (¿la api te ofrece pasarte pelis parecidas a su coleccion de favoritas o no?)
 
+// Al cambiar el idioma en el medio del uso, deberia llamarse de nuevo al fetch de todas las pelis, para que las presente ya con sus titulos traducidos al nuevo idioma.
+
+// Cuando se eligen pelis por género, a veces queda la 1 igual, a veces no, eso quizas podria solucionarse con sort, aunque recordar que antes trajo problemas.... quizas ni sea un problema despues de todo
 
 // La resolucion del responsive de la hambuerguesa esta mal hecha, deberia centrase de manera mas automatica, mejorar. La cajita negra que sale al clickearla necesita su adaptatividad tambien
 
 // estaria bueno un buscador por director o por interpete que vaya filtrando dentro de los posibles, de manera que si pones tom h te complete a tom hanks-....
+
+//Nuevo Logo CATA ? Deberia decir Abeto´s TRAILER database
 
 //Agregar typescript: esto es nuevo asi que vamos a pensarlo bien antes de tocar el código.
 CÓMO SERIA LA ESTRUCTURA? DENTRO DE "/types/tmdbProjectTypes.d.ts" ARMAR TODOS LOS TYPES DE RESPUESTAS DE LA API. Creo que mejor cada type deberia ir arriba de su fetch, es mas simple de buscar ahi para referencia
@@ -61,7 +66,7 @@ interface Employee {
 }
 const [employees, setEmployees] = useState<Employee[]>([]);
 
-//Agregar Context o Redux??
+//Agregar Context o Redux?? Creo que vamos con Context, y se podria probar primero pasarle simplemente alguna prop, como darkMode o language. Despues de a poco quizás todo el resto....
 
 
 //----------------------------------------
