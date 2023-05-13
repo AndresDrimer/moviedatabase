@@ -10,6 +10,7 @@ function AditionalInfo({
 }) {
   return (
     <>
+    <p className="text-white text-xs lg:text-md">{movie.overview}</p>
       <hr className="w-[40px] my-4" />
       <ul className="text-white text-xs lg:text-md leading-6">
         {creditsOneMovie.crew.map(

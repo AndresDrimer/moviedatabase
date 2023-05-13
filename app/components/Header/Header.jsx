@@ -68,6 +68,7 @@ function Header({
         fetchMovies={fetchMovies}
         playing={playing}
         english={english}
+        darkMode={darkMode}
       />
     </Fragment>
   );

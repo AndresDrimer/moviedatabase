@@ -5,17 +5,12 @@ TO DO:..
 //Auth : una opcion seria hacerla con NextAuth. (o Firebase)
 Despues quisiera que ademas de permitir el ingreso, el usuario pueda:
 - guardar su perfil:
-    -mail y pwd de ingreso, tambien acalaracion de mayor de edad o no para filtarle contenido adulto por default
+    -mail y pwd de ingreso, 
+    -edad para filtarle o no contenido adulto por default
     -nombre
     -avatar
-    -preferencias: filtrar siempre contenido adulto, puntajes propios... algo mas?
+    -preferencias: filtrar siempre contenido adulto o no, poner puntajes propios, elegir sus favoritos y almacenarlos... algo mas? (la api te ofrece pasarte pelis parecidas a su coleccion de favoritas?)
 
-
-// hacer que los rectangulos de pelicula midan todos igual
-
-//la busqueda por director itnee algo raro, el director no coincide en todas las pelis, quizas sea que haga algo en el área director y por eso confunda, ver en detalle....
-
-// permitir al usuario puntuar 
 
 // La resolucion del responsive de la hambuerguesa esta mal hecha, deberia centrase de manera mas automatica, mejorar. La cajita negra que sale al clickearla necesita su adaptatividad tambien
 
@@ -90,4 +85,4 @@ DONE:
 
 // Puntaje. Incluir puntaje de database - HECHO
 
-// Tiene que buscar por director y por actor/actriz - HECHO
+// Tiene que buscar por director y por actor/actriz - HECHO. Un detalle: la busqueda por director tiene algo raro: incluye a quienes estan en el area direccion(director, audante de direccion, etc...), no sólo al director

@@ -218,7 +218,7 @@ function Main() {
       const director = response.data.results.find(
         ({ known_for_department }) => known_for_department === "Directing"
       );
-      console.log(director.id)
+      console.log(response.data.results)
       return director.id;
         
     } catch (err) {

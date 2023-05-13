@@ -1,7 +1,7 @@
 import React from 'react'
 import noPosterCover from "../../../public/noposter.png";
 
-function SearchMovie({ showMovieSearch, query, setQuery, fetchMovies, playing, english }) {
+function SearchMovie({ showMovieSearch, query, setQuery, fetchMovies, playing, english,darkMode }) {
   //funcion para buscar peliculas
   const searchMovies = (e) => {
     e.preventDefault();
@@ -22,7 +22,7 @@ function SearchMovie({ showMovieSearch, query, setQuery, fetchMovies, playing, e
           onSubmit={searchMovies}
         >
           <input
-            className="border-2 rounded-lg p-2 capitalize"
+            className={`border-2 rounded-lg p-2 capitalize`}
             type="text"
             placeholder={english ? "Search movie" : "Buscar pelicula"}
             value={query}

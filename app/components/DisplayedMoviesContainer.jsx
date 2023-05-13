@@ -17,7 +17,7 @@ function DisplayedMoviesContainer({
             className="flex flex-col items-center cursor-pointer relative"
             onClick={() => selectMovie(it)}
           >
-            <div className="hover:scale-105 hover:duration-700 ">
+            <div className="hover:scale-105 hover:duration-700 h-200">
               <Image
                 src={
                   it.poster_path
@@ -31,7 +31,7 @@ function DisplayedMoviesContainer({
                 className="w-full h-auto"
               />
               <div className="border-4 border-blue-800 rounded-full p-2 h-[55px] max-w-[55px] font-bold text-2xl bg-gray-100 opacity-90 mr-4 absolute top-5 right-0">
-                {it.vote_average.toFixed(1) * 10}{" "}
+                {it.vote_average!= 0 ? it.vote_average.toFixed(1) * 10 : "00"}{" "}
               </div>{" "}
 
               <section className=" px-2 w-full flex h-auto items-center justify-between ">

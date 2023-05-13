@@ -92,7 +92,7 @@ function VideoBannerAndPlayer({
                       <h3 className="text-white text-bolder text-sm lg:text-lg pb-2">
                         {movie.tagline}
                       </h3>
-                      <p className="text-white text-xs lg:text-md">{movie.overview}</p>
+                      
                       {showInfo && (
                         <AditionalInfo
                           creditsOneMovie={creditsOneMovie}
